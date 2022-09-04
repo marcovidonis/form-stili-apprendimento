@@ -78,6 +78,19 @@ function App() {
         <Typography variant="body2" sx={{ mt: 3 }}>
           Credit: Mariani Luciano, 2000, Zanichelli
         </Typography>
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          Made by
+          {' '}
+          <Typography
+            variant="body2"
+            component="a"
+            href="https://marcovidonis.com"
+            target="_blank"
+            sx={{ color: 'primary.main', textDecoration: 'none' }}
+          >
+            marcovidonis.com
+          </Typography>
+        </Typography>
       </Paper>
     </ThemeProvider>
   );
