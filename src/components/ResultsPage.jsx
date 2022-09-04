@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Button } from '@mui/material';
 
 function ResultsPage(props) {
-  const { setShowResults } = props;
+  const { results, setShowResults } = props;
+
+  useEffect(() => {
+  }, [results]);
 
   return (
     <>

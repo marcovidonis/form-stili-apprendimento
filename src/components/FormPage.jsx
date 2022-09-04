@@ -28,21 +28,11 @@ const valueOptions = [
 ];
 
 function FormPage(props) {
-  const { setShowResults } = props;
+  const { setShowResults, results, setResults } = props;
 
   const [ready, setReady] = useState(false);
   const [name, setName] = useState('');
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
-  const [results, setResults] = useState({
-    A1: {},
-    A2: {},
-    A3: {},
-    A4: {},
-    B1: {},
-    B2: {},
-    C1: {},
-    C2: {},
-  });
 
   useEffect(() => {
     // shuffle questions
@@ -53,15 +43,34 @@ function FormPage(props) {
   }, []);
 
   const calculateResults = () => {
-    console.log(results);
+    const areaTotals = {
+      A: 0,
+      B: 0,
+      C: 0,
+    };
+    Object.entries(results).forEach(([subArea, answersObj]) => {
+      const area = subArea.slice(0, 1);
+      const subAreaTotal = Object.values(answersObj).reduce((prev, curr) => prev + curr, 0);
+      areaTotals[area] += subAreaTotal;
+      results[subArea].total = subAreaTotal;
+    });
+
+    Object.keys(results).forEach((subArea) => {
+      const { total: subAreaTotal } = results[subArea];
+      const area = subArea.slice(0, 1);
+      const areaTotal = areaTotals[area];
+      results[subArea].percentage = areaTotal ? (subAreaTotal / areaTotals[area]) * 100 : 0;
+    });
+
     setShowResults(true);
+    setResults(results);
   };
 
   const handleResponse = ({ id, subArea, value }) => {
     if (!id || !subArea) {
       return;
     }
-    results[subArea][id] = value;
+    results[subArea][id] = parseInt(value, 10);
     setResults(results);
   };
 
@@ -90,11 +99,11 @@ function FormPage(props) {
 
         {shuffledQuestions.map(({ subArea, id, text }) => (
           <FormControl required sx={classes.formControl} key={id}>
-            <FormLabel id="form-question-1">
+            <FormLabel id={`form-question-${id}`}>
               {text}
             </FormLabel>
             <RadioGroup
-              aria-labelledby="form-question-1"
+              aria-labelledby={`form-question-${id}`}
               // name="radio-buttons-group"
               value={results[subArea][id]}
               onChange={(ev) => handleResponse({
