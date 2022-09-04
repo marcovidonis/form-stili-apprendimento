@@ -107,10 +107,10 @@ function FormPage(props) {
           sx={{ mb: 2, width: '100%' }}
         />
 
-        {shuffledQuestions.map(({ subArea, id, text }) => (
+        {shuffledQuestions.map(({ subArea, id, text }, index) => (
           <FormControl required sx={classes.formControl} key={id}>
             <FormLabel id={`form-question-${id}`} sx={{ fontWeight: 500 }}>
-              {text}
+              {`${index + 1}) ${text}`}
             </FormLabel>
             <RadioGroup
               aria-labelledby={`form-question-${id}`}
