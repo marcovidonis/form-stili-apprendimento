@@ -94,12 +94,12 @@ function FormPage(props) {
           size="small"
           value={name}
           onChange={(ev) => setName(ev.target.value)}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, width: '100%' }}
         />
 
         {shuffledQuestions.map(({ subArea, id, text }) => (
           <FormControl required sx={classes.formControl} key={id}>
-            <FormLabel id={`form-question-${id}`}>
+            <FormLabel id={`form-question-${id}`} sx={{ fontWeight: 500 }}>
               {text}
             </FormLabel>
             <RadioGroup

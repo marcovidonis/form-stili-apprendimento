@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Paper, Typography } from '@mui/material';
-import { purple } from '@mui/material/colors';
+import { lightGreen } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // import './App.css';
@@ -11,7 +11,7 @@ import ResultsPage from './components/ResultsPage';
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[700],
+      main: lightGreen[600],
     },
   },
   typography: {
@@ -25,18 +25,25 @@ const theme = createTheme({
   },
 });
 
+const initialResults = {
+  A1: {},
+  A2: {},
+  A3: {},
+  A4: {},
+  B1: {},
+  B2: {},
+  C1: {},
+  C2: {},
+};
+
 function App() {
   const [showResults, setShowResults] = useState(false);
-  const [results, setResults] = useState({
-    A1: {},
-    A2: {},
-    A3: {},
-    A4: {},
-    B1: {},
-    B2: {},
-    C1: {},
-    C2: {},
-  });
+  const [results, setResults] = useState(initialResults);
+
+  const restartForm = () => {
+    setResults(initialResults);
+    setShowResults(false);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -51,7 +58,7 @@ function App() {
         </Typography>
         {showResults ? (
           <ResultsPage
-            setShowResults={(value) => setShowResults(value)}
+            restartForm={restartForm}
             results={results}
           />
         ) : (
@@ -62,7 +69,7 @@ function App() {
           />
         )}
         <Typography variant="body2" sx={{ mt: 3 }}>
-          Credit: Mariano Luciano, 2000, Zanichelli
+          Credit: Mariani Luciano, 2000, Zanichelli
         </Typography>
       </Paper>
     </ThemeProvider>
