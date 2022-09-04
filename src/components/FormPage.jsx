@@ -39,6 +39,15 @@ function FormPage(props) {
     // shuffle questions
     questions.sort(() => Math.random() - 0.5);
 
+    // TEST assign random answers
+    // questions.forEach((qn) => {
+    //   const testAnswer = Math.floor(Math.random() * 4);
+    //   results[qn.subArea][qn.id] = testAnswer;
+    // });
+    // setResults(results);
+    // console.log(results);
+    // end of TEST
+
     setShuffledQuestions(questions);
     setReady(true);
   }, []);
@@ -51,7 +60,7 @@ function FormPage(props) {
     };
     Object.entries(results).forEach(([subArea, answersObj]) => {
       const area = subArea.slice(0, 1);
-      const subAreaTotal = Object.values(answersObj).reduce((prev, curr) => prev + curr, 0);
+      const subAreaTotal = Object.values(answersObj).reduce((prev, curr) => prev + curr);
       areaTotals[area] += subAreaTotal;
       results[subArea].total = subAreaTotal;
     });
@@ -60,7 +69,7 @@ function FormPage(props) {
       const { total: subAreaTotal } = results[subArea];
       const area = subArea.slice(0, 1);
       const areaTotal = areaTotals[area];
-      results[subArea].percentage = areaTotal ? (subAreaTotal / areaTotals[area]) * 100 : 0;
+      results[subArea].percentage = areaTotal ? ((subAreaTotal / areaTotal) * 100).toFixed(1) : 0;
     });
 
     setShowResults(true);
