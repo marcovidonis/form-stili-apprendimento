@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import { Paper, Typography } from '@mui/material';
 import { lightGreen } from '@mui/material/colors';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 // import './App.css';
 import FormPage from './components/FormPage';
 import ResultsPage from './components/ResultsPage';
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: lightGreen[600],
@@ -24,6 +24,8 @@ const theme = createTheme({
     ].join(','),
   },
 });
+
+theme = responsiveFontSizes(theme, { breakpoints: ['xs', 'sm'] });
 
 const initialResults = {
   A1: {},
@@ -47,7 +49,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper elevation={2} sx={{ m: 3, p: 3 }}>
+      <Paper
+        elevation={2}
+        sx={{
+          m: 3, mx: 'auto', px: { xs: 4, sm: 8 }, py: 4, maxWidth: '700px',
+        }}
+      >
         <Typography
           variant="h4"
           component="h1"

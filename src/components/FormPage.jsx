@@ -17,6 +17,7 @@ import questions from '../assets/formQuestions';
 const classes = {
   formControl: {
     mb: 2,
+    width: '100%',
   },
 };
 
