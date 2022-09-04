@@ -8,7 +8,6 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  TextField,
   Typography,
 } from '@mui/material';
 
@@ -32,7 +31,6 @@ function FormPage(props) {
   const { setShowResults, results, setResults } = props;
 
   const [ready, setReady] = useState(false);
-  const [name, setName] = useState('');
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   useEffect(() => {
@@ -97,16 +95,6 @@ function FormPage(props) {
       </Typography>
 
       <form onSubmit={calculateResults}>
-        <TextField
-          required
-          variant="outlined"
-          label="Nome e Cognome"
-          size="small"
-          value={name}
-          onChange={(ev) => setName(ev.target.value)}
-          sx={{ mb: 2, width: '100%' }}
-        />
-
         {shuffledQuestions.map(({ subArea, id, text }, index) => (
           <FormControl required sx={classes.formControl} key={id}>
             <FormLabel id={`form-question-${id}`} sx={{ fontWeight: 500 }}>
