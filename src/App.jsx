@@ -43,7 +43,7 @@ function App() {
   const [results, setResults] = useState(initialResults);
 
   const restartForm = () => {
-    setResults(initialResults);
+    setResults({ ...initialResults });
     setShowResults(false);
   };
 
